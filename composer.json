@@ -19,7 +19,7 @@
     },
     "autoload": {
         "psr-4": {
-            "discaR\\oauth2forjira\\": ""
+            "oauth2forjira\\": ""
         }
     }
 }
