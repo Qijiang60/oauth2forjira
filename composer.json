@@ -1,0 +1,26 @@
+{
+    "name": "discaR/oauth2forjira",
+    "description": "OAuth2 for Jira",
+    "keywords": ["yii", "extension", "module", "jira", "oauth2"],
+    "homepage": "https://github.com/discaR/oauth2forjira",
+    "type": "yii2-extension",
+    "license": "MIT",
+    "version": "1.0.0",
+    "support": {
+        "email": "none",
+        "source": "https://github.com/filsh/yii2-oauth2-server"
+    },
+    "authors": [
+        {
+            "name": "discaR",
+            "email": "none"
+        }
+    ],
+    "require": {
+    },
+    "autoload": {
+        "psr-4": {
+            "discaR\\oauth2forjira\\": ""
+        }
+    },
+}
