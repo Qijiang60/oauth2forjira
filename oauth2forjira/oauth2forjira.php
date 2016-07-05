@@ -2,20 +2,15 @@
 namespace discaR\oauth2forjira;
 class oauth2forjira
 {
-    public function signUp()
+    public function signUp($username, $password, $email, $name)
     {
         $ch = curl_init();
-        $url = 'https://jira.atlassian.com/rest/api/2/users';
         $url2 = 'http://jira.local.com/rest/api/2/user';
         $url3 = 'http://gitlab.local.com/api/v3/users';
         $postData = array('name' => 'mytest', 'password' => 'qwe123789', 'emailAddress' => 'mytest@qq.com',
             'displayName' => 'testz', 'applicationKey' => 'jira-core');
-        $postData2 = '{"name":"charlie2","password":"123123","emailAddress":"charlie2@test.com","displayName":"Charlie of Atlassian","applicationKeys":["jira-core"]}';
-        $postData2 = json_encode($postData2);
-        $postData3 = array('username' => 'mytest2', 'password' => 'qweqweqwe', 'email' => 'chuanhangyu@xmisp.com',
-            'name' => 'testz');
-        $postData4 = '{"username":"mytest","password":"qweqweqwe","email":"charlie2@test.com","name":"Charlie"}';
-        $postData4 = json_encode($postData4);
+        $postData3 = array('username' => $username, 'password' => $password, 'email' => $email,
+            'name' => $name);
         curl_setopt($ch, CURLOPT_URL, $url3);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -23,7 +18,25 @@ class oauth2forjira
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('PRIVATE-TOKEN:wyHczqs4m3Qmadxrx6it', 'SUDO:root'));
         $data = curl_exec($ch);
         curl_close($ch);
-        var_dump($data);
+        if (strpos($data, 'id')) {
+            echo 'success';
+            return array('state' => 0,
+                'msg' => '注册成功！'
+            );
+        } else if (strpos($data, 'Email has already been taken')) {
+            echo '该邮箱已被注册！';
+            return array(
+                'state' => 1,
+                'msg' => '该邮箱已被注册！'
+            );
+        } else if (strpos($data, 'Username has already been taken')) {
+            echo '该用户名已被注册！';
+            return array(
+                'state' => 2,
+                'msg' => '该用户名已被注册！'
+            );
+        }
+
 
         //$postdata = http_build_query(array('username'=>'mytest', 'password'=>'qwe123789', 'email'=>'mytest@qq.com','name'=>'testz'));
         //$options = array(
