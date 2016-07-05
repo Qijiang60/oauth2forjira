@@ -1,5 +1,5 @@
 <?php
-namespace discaR\oauth2forjira;
+namespace discaR\oauth2forjira\oauth2forjira;
 class oauth2forjira
 {
     public function signUp($username, $password, $email, $name)
