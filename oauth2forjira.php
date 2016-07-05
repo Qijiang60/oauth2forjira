@@ -7,13 +7,15 @@ $postData = array('name'=>'mytest', 'password'=>'qwe123789', 'emailAddress'=>'my
     'displayName'=>'testz','applicationKey'=>'jira-core');
 $postData2 = '{"name":"charlie2","password":"123123","emailAddress":"charlie2@test.com","displayName":"Charlie of Atlassian","applicationKeys":["jira-core"]}';
 $postData2 = json_encode($postData2);
-$postData3 = array('username'=>'mytest', 'password'=>'qwe123789', 'emailAddress'=>'mytest@qq.com',
+$postData3 = array('username'=>'mytest2', 'password'=>'qweqweqwe', 'email'=>'chuanhangyu@xmisp.com',
     'name'=>'testz');
-curl_setopt($ch, CURLOPT_URL, $url2);
+$postData4 = '{"username":"mytest","password":"qweqweqwe","email":"charlie2@test.com","name":"Charlie"}';
+$postData4 = json_encode($postData4);
+curl_setopt($ch, CURLOPT_URL, $url3);
 curl_setopt($ch, CURLOPT_POST, true);
-curl_setopt($ch, CURLOPT_HEADER, 'PRIVATE-TOKEN: P1oCt4aGBGpACJp8TxiL');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS,$postData2);
+curl_setopt($ch, CURLOPT_POSTFIELDS,$postData3);
+curl_setopt($ch, CURLOPT_HTTPHEADER, array('PRIVATE-TOKEN:wyHczqs4m3Qmadxrx6it','SUDO:root'));
 $data = curl_exec($ch);
 curl_close($ch);
 var_dump($data);
