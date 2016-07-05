@@ -1,5 +1,5 @@
 {
-    "name": "discaR/oauth2forjira",
+    "name": "discar/oauth2forjira",
     "description": "OAuth2 for Jira",
     "keywords": ["yii", "extension", "module", "jira", "oauth2"],
     "homepage": "https://github.com/discaR/oauth2forjira",
