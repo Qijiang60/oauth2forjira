@@ -5,6 +5,7 @@
     "homepage": "https://github.com/discaR/oauth2forjira",
     "type": "yii2-extension",
     "license": "MIT",
+    "minimum-stability": "dev",
     "support": {
         "email": "chunahangyu@xmisp.com",
         "source": "https://github.com/filsh/yii2-oauth2-server"
