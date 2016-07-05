@@ -7,13 +7,13 @@
     "license": "MIT",
     "version": "1.0.0",
     "support": {
-        "email": "none",
+        "email": "chunahangyu@xmisp.com",
         "source": "https://github.com/filsh/yii2-oauth2-server"
     },
     "authors": [
         {
             "name": "discaR",
-            "email": "none"
+            "email": "chunahangyu@xmisp.com"
         }
     ],
     "require": {
