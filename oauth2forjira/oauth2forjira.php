@@ -1,17 +1,25 @@
 <?php
-namespace discaR\oauth2forjira;
+namespace discaR\oauth2forjira\oauth2forjira;
 class oauth2forjira
 {
+    private $api;
+    private $user;
+    private $pwd;
+    public function __construct($api = 'http://gitlab.local.com/api/v3/users', $user = 'root', $pwd = 'root')
+    {
+        $this->api = $api;
+        $this->user = $user;
+        $this->pwd = $pwd;
+    }
+
     public function signUp($username, $password, $email, $name)
     {
         $ch = curl_init();
-        $url2 = 'http://jira.local.com/rest/api/2/user';
-        $url3 = 'http://gitlab.local.com/api/v3/users';
         $postData = array('name' => 'mytest', 'password' => 'qwe123789', 'emailAddress' => 'mytest@qq.com',
             'displayName' => 'testz', 'applicationKey' => 'jira-core');
         $postData3 = array('username' => $username, 'password' => $password, 'email' => $email,
             'name' => $name);
-        curl_setopt($ch, CURLOPT_URL, $url3);
+        curl_setopt($ch, CURLOPT_URL, $this->api);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $postData3);
