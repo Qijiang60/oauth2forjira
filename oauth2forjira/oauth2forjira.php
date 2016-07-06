@@ -6,7 +6,7 @@ class oauth2forjira
     private $user;
     private $pwd;
 
-    public function __construct($api = 'http://gitlab.local.com/api/v3/users', $user = 'root', $pwd = 'root')
+    public function __construct($api = 'http://jira.local.com/rest/api/2/user', $user = 'root', $pwd = 'testtest')
     {
         $this->api = $api;
         $this->user = $user;
@@ -16,33 +16,28 @@ class oauth2forjira
     public function signUp($username, $password, $email, $name)
     {
         $ch = curl_init();
-        $postData = array('name' => 'mytest', 'password' => 'qwe123789', 'emailAddress' => 'mytest@qq.com',
-            'displayName' => 'testz', 'applicationKey' => 'jira-core');
-        $postData3 = array('username' => $username, 'password' => $password, 'email' => $email,
-            'name' => $name);
+//        $postData = array('name' => 'mytest', 'password' => 'qwe123789', 'emailAddress' => 'mytest@qq.com',
+//            'displayName' => 'testz', 'applicationKey' => 'jira-core');
+//        $postData3 = array('username' => $username, 'password' => $password, 'email' => $email,
+//            'name' => $name);
+        $postData2 = "{\"name\":\"$username\",\"password\":\"$password\",\"emailAddress\":\"$email\",\"displayName\":\"$name\",\"applicationKeys\":[\"jira-core\"]}";
         curl_setopt($ch, CURLOPT_URL, $this->api);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $postData3);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('PRIVATE-TOKEN:wyHczqs4m3Qmadxrx6it', 'SUDO:root'));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postData2);
+        curl_setopt($ch, CURLOPT_USERPWD, "$this->user:$this->pwd");
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
         $data = curl_exec($ch);
         curl_close($ch);
-        if (strpos($data, 'id')) {
-            echo 'success';
+        if (strpos($data, 'error')) {
+//            echo 'success';
             return array('state' => 0,
                 'msg' => '注册成功！'
             );
-        } else if (strpos($data, 'Email has already been taken')) {
-            echo '该邮箱已被注册！';
+        } else {
+//            echo 'error';
             return array(
-                'state' => 1,
-                'msg' => '该邮箱已被注册！'
-            );
-        } else if (strpos($data, 'Username has already been taken')) {
-            echo '该用户名已被注册！';
-            return array(
-                'state' => 2,
-                'msg' => '该用户名已被注册！'
+                'msg' => '注册失败！'
             );
         }
 
