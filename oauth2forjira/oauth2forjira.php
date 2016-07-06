@@ -5,6 +5,7 @@ class oauth2forjira
     private $api;
     private $user;
     private $pwd;
+
     public function __construct($api = 'http://gitlab.local.com/api/v3/users', $user = 'root', $pwd = 'root')
     {
         $this->api = $api;
